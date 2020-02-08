@@ -22,7 +22,32 @@
 
     <div id="editMenu">
         <h1>Редактировать информацию</h1>
+        <button name='plantType1' type='button' id='plantType1'>Папоротник</button>
+        <button name='plantType2' type='button' id='plantType2'>Ель</button>
         <form name="edit">
+            <div id='commonContainer' style="display: none">
+                <div class='editInfo'>
+                <label>Название: </label>
+                <input name='type' type='text' id='editNameField' value=''>
+                <br>
+                <label> Возраст: </label>
+                <input name='age' type='text' id='editAgeField' value=''>
+            </div>
+            <div id='fernContainer' style="display: none">
+                <label>Описание:</label>
+                <input name='desc' type='text' id='editDescriptionField' value=''>
+                <br>
+                <label>Ядовитый: </label>
+                <input name='poison' type='checkbox' id='editPoisonField' value=''>
+            </div>
+            <div id='spruceContainer' style="display: none">
+                <label>Место произрастания:</label>
+                <input name='area' type='text' id='editAreaField' value=''>
+                <br>
+                <label>Область применения: </label>
+                <input name='application' type='text' id='applicationField' value=''>
+                <br>
+            </div>
         </form>
     </div>
 
