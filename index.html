@@ -22,11 +22,12 @@
 
     <div id="editMenu">
         <h1>Редактировать информацию</h1>
-        <button name='plantType1' type='button' id='plantType1'>Папоротник</button>
-        <button name='plantType2' type='button' id='plantType2'>Ель</button>
+        <div id="buttonFormComtainer">
+            <button name='plantType1' type='button' id='plantType1'>Папоротник</button>
+            <button name='plantType2' type='button' id='plantType2'>Ель</button>
+        </div>    
         <form name="edit">
             <div id='commonContainer' style="display: none">
-                <div class='editInfo'>
                 <label>Название: </label>
                 <input name='type' type='text' id='editNameField' value=''>
                 <br>
@@ -48,6 +49,7 @@
                 <input name='application' type='text' id='applicationField' value=''>
                 <br>
             </div>
+            <input type='button' id='editElement' value='Ок'>
         </form>
     </div>
 

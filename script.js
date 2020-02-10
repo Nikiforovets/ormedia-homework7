@@ -80,36 +80,24 @@ function addPlantsListeners(){
 }
 
 function printEditMenu(i, plants){
-    let form = document.getElementById("editMenu").getElementsByTagName("form");
-    form[0].innerHTML = "<br>";
-    form[0].innerHTML += "<div class='editInfo'>" + 
-    "<label>Название: </label>" + "<input name='type' type='text' id='editNameField' value='" + plants[i].type + "'>";
-    form[0].innerHTML += "<label> Возраст: </label>" + "<input name='age' type='text' id='editAgeField' value='" + plants[i].age + "'>" + "<br>";
+    document.getElementById("buttonFormComtainer").style.display = "none";
+
+    document.getElementById("editNameField").value =  plants[i].type;
+    document.getElementById("editAgeField").value = plants[i].age;
     if(plants[i] instanceof Fern){
-        form[0].innerHTML += "<label>Описание: </label>" + "<input name='desc' type='text' id='editDescriptionField' value='" + plants[i].description + "'>";
-        form[0].innerHTML += "<br>";
-        form[0].innerHTML += "<label>Ядовитый: </label>";
-        form[0].innerHTML += "<input name='poison' type='checkbox' id='editPoisonField' value='да'>"; 
+        document.getElementById("editDescriptionField").value = plants[i].description;
+        document.getElementById("spruceContainer").style.display = "none";
+        document.getElementById("fernContainer").style.display = "";
     }
     else{
-        form[0].innerHTML += "<label>Место произрастания: </label>" + "<input name='area' type='text' id='editAreaField' value='" + plants[i].area + "'>" + "<br>";
-        form[0].innerHTML += "<label>Область применения: </label>" + "<input name='application' type='text' id='applicationField' value='" + plants[i].application + "'>" + "<br>";
+        document.getElementById("editAreaField").value = plants[i].area;
+        document.getElementById("applicationField").value = plants[i].application;
+        document.getElementById("spruceContainer").style.display = "";
+        document.getElementById("fernContainer").style.display = "none";
     }
-    form[0].innerHTML += "<input type='button' id='editElement' value='Изменить'>";
-    form[0].innerHTML += "</div>";
-    
-    document.getElementById("editElement").addEventListener("click", ()=>{
-        let newPlant;    
-        if(plants[i] instanceof Fern){
-            newPlant = new Fern(form[0].elements.type.value, form[0].elements.age.value, form[0].elements.desc.value, form[0].elements.poison.checked);
-        }
-        else{
-            newPlant = new Spruce(form[0].elements.type.value, form[0].elements.age.value, form[0].elements.area.value, form[0].elements.application.value);
-        }
-        plants[i] = newPlant;
-        printPlantsArray(plants);
-        switchDisplay("commonInfo");
-    });
+
+    document.getElementById("commonContainer").style.display = "";
+    plants.splice(i,1);
 }
 
 function removePlant(i, plants){
@@ -139,9 +127,7 @@ function switchDisplay(display){
 }
 
 function addPlant(){
-    console.log("fgh");
     switchDisplay("editMenu");
-    let form = document.getElementById("editMenu").getElementsByTagName("form");
 
     document.getElementById("plantType1").addEventListener("click", ()=>{
         document.getElementById("commonContainer").style.display = "";
@@ -154,25 +140,24 @@ function addPlant(){
         document.getElementById("spruceContainer").style.display = "";
         document.getElementById("fernContainer").style.display = "none";
     });
-    
-    form[0].innerHTML += "<input type='button' id='editElement' value='Создать'>";
-    form[0].innerHTML += "</div>";
-    
-    document.getElementById("editElement").addEventListener("click", ()=>{
-        let newPlant;    
-        if(document.getElementById("spruceContainer").style.display == "none" &&
-        document.getElementById("fernContainer").style.display == ""){
-            newPlant = new Fern(form[0].elements.type.value, form[0].elements.age.value, form[0].elements.desc.value, form[0].elements.poison.checked);
-            plants.push(newPlant);
-            printPlantsArray(plants);
-            switchDisplay("commonInfo");
-        }if(document.getElementById("spruceContainer").style.display == "" &&
-        document.getElementById("fernContainer").style.display == "none"){
-            newPlant = new Spruce(form[0].elements.type.value, form[0].elements.age.value, form[0].elements.area.value, form[0].elements.application.value);
-            plants.push(newPlant);
-            printPlantsArray(plants);
-            switchDisplay("commonInfo");
-        }
-        
-    });
 };
+
+
+document.getElementById("editElement").addEventListener("click", ()=>{
+    let form = document.getElementById("editMenu").getElementsByTagName("form");
+    let newPlant;    
+    if(document.getElementById("spruceContainer").style.display == "none" &&
+    document.getElementById("fernContainer").style.display == ""){
+        newPlant = new Fern(form[0].elements.type.value, form[0].elements.age.value, form[0].elements.desc.value, form[0].elements.poison.checked);
+        plants.push(newPlant);
+        printPlantsArray(plants);
+        switchDisplay("commonInfo");
+    }if(document.getElementById("spruceContainer").style.display == "" &&
+    document.getElementById("fernContainer").style.display == "none"){
+        newPlant = new Spruce(form[0].elements.type.value, form[0].elements.age.value, form[0].elements.area.value, form[0].elements.application.value);
+        plants.push(newPlant);
+        printPlantsArray(plants);
+        switchDisplay("commonInfo");
+    }
+    
+});
