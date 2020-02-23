@@ -1,4 +1,5 @@
 let plants = [];
+let numberOfEditPlant;
 
 let fern1 = new Fern("орляк", 12, "Многолетний травянистый папоротник", false);
 let fern2 = new Fern("щитовник", 7, "Папоротник дубовых лесов", true);
@@ -97,7 +98,8 @@ function printEditMenu(i, plants){
     }
 
     document.getElementById("commonContainer").style.display = "";
-    plants.splice(i,1);
+    //plants.splice(i,1);
+    numberOfEditPlant = i;
 }
 
 function removePlant(i, plants){
@@ -128,6 +130,7 @@ function switchDisplay(display){
 
 function addPlant(){
     switchDisplay("editMenu");
+    document.getElementById("buttonFormComtainer").style.display = "";
 
     document.getElementById("plantType1").addEventListener("click", ()=>{
         document.getElementById("commonContainer").style.display = "";
@@ -140,6 +143,10 @@ function addPlant(){
         document.getElementById("spruceContainer").style.display = "";
         document.getElementById("fernContainer").style.display = "none";
     });
+    numberOfEditPlant = plants.length;
+    
+    let form = document.getElementById("editForm");
+    form.reset();
 };
 
 
@@ -149,13 +156,15 @@ document.getElementById("editElement").addEventListener("click", ()=>{
     if(document.getElementById("spruceContainer").style.display == "none" &&
     document.getElementById("fernContainer").style.display == ""){
         newPlant = new Fern(form[0].elements.type.value, form[0].elements.age.value, form[0].elements.desc.value, form[0].elements.poison.checked);
-        plants.push(newPlant);
+        //plants.push(newPlant);
+        plants.splice(numberOfEditPlant,1,newPlant);
         printPlantsArray(plants);
         switchDisplay("commonInfo");
     }if(document.getElementById("spruceContainer").style.display == "" &&
     document.getElementById("fernContainer").style.display == "none"){
         newPlant = new Spruce(form[0].elements.type.value, form[0].elements.age.value, form[0].elements.area.value, form[0].elements.application.value);
-        plants.push(newPlant);
+        //plants.push(newPlant);
+        plants.splice(numberOfEditPlant,1,newPlant);
         printPlantsArray(plants);
         switchDisplay("commonInfo");
     }
